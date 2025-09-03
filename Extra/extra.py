@@ -39,12 +39,13 @@ print(f"{len(paisesNorte[np.char.find(paisesNorte, 'NORTHERN AMERICA') >= 0])} p
 
 print()
 
-paisesCaribe = data[:, 1]
+paisesCaribe = np.char.rstrip(data[:, 1])
 renda = data[:, 8].astype(float)
-boolRendaPerCapita = np.char.find(paisesCaribe, 'LATIN AMER. & CARIB') >= 0
-rendaperCapitaCaribe = renda[boolRendaPerCapita]
+BoolrendaPercapita = paisesCaribe == 'LATIN AMER. & CARIB'
+print(BoolrendaPercapita)
+rendaperCapitaCaribe = renda[BoolrendaPercapita]
 maxIndex = np.argmax(rendaperCapitaCaribe)
-paisesFiltrados = data[boolRendaPerCapita, 0]
+paisesFiltrados = data[BoolrendaPercapita, 0]
 
 print(f"País com maior renda: {paisesFiltrados[maxIndex]}")
 print(f"Maior Renda per Capita de LATIN AMER. & CARIB : {rendaperCapitaCaribe[maxIndex]:.2f}")
